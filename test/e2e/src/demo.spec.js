@@ -13,7 +13,7 @@ describe('aurelia skeleton app', function() {
   });
 
   it('should load the page and display the initial page title', () => {
-    expect(poSkeleton.getCurrentPageTitle()).toBe('Welcome | Aurelia');
+    expect(poSkeleton.getCurrentPageTitle()).toBe('Welcome | nomjs');
   });
 
   it('should display greeting', () => {
@@ -32,10 +32,5 @@ describe('aurelia skeleton app', function() {
 
   it('should show alert message when clicking submit button', () => {
     expect(poWelcome.openAlertDialog()).toBe(true);
-  });
-
-  it('should navigate to users page', () => {
-    poSkeleton.navigateTo('#/users');
-    expect(poSkeleton.getCurrentPageTitle()).toBe('Github Users | Aurelia');
   });
 });
