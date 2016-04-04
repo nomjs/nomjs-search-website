@@ -34,21 +34,14 @@ gulp.task('build-html', function() {
 
 // compiles sass and copies css to the source directory
 // because link rel from index.html only works from there
-// TODO #1 source maps
 gulp.task('build-css', function() {
   gulp.src(paths.style)
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css))
     .pipe(browserSync.stream());
 });
-
-// old task for reference
-// gulp.task('build-css-old', function() {
-//   return gulp.src(paths.css)
-//     .pipe(changed(paths.output, {extension: '.css'}))
-//     .pipe(gulp.dest(paths.output))
-//     .pipe(browserSync.stream());
-// });
 
 // this task calls the clean task (located
 // in ./clean.js), then runs the build-system
