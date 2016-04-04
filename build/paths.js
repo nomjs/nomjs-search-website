@@ -1,4 +1,5 @@
 var appRoot = 'src/';
+var stylesRoot = 'styles/';
 var outputRoot = 'dist/';
 var exportSrvRoot = 'export/';
 
@@ -6,8 +7,9 @@ module.exports = {
   root: appRoot,
   source: appRoot + '**/*.js',
   html: appRoot + '**/*.html',
-  css: appRoot + '**/*.css',
+  scss: stylesRoot + '**/*.scss',
   style: 'styles/styles.scss',
+  css: outputRoot + 'styles/styles.css',
   output: outputRoot,
   exportSrv: exportSrvRoot,
   doc: './doc',

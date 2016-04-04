@@ -6,7 +6,6 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
-
   map: {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-beta.1.2.0",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.2.0",
@@ -21,14 +20,10 @@ System.config({
     "aurelia-templating-binding": "npm:aurelia-templating-binding@1.0.0-beta.1.2.1",
     "aurelia-templating-resources": "npm:aurelia-templating-resources@1.0.0-beta.1.2.1",
     "aurelia-templating-router": "npm:aurelia-templating-router@1.0.0-beta.1.2.0",
-    "bootstrap": "github:twbs/bootstrap@3.3.6",
     "bootstrap-sass": "github:twbs/bootstrap-sass@3.3.6",
     "fetch": "github:github/fetch@0.11.0",
     "font-awesome": "npm:font-awesome@4.5.0",
     "text": "github:systemjs/plugin-text@0.0.3",
-    "github:twbs/bootstrap@3.3.6": {
-      "jquery": "github:components/jquery@2.2.1"
-    },
     "npm:aurelia-animator-css@1.0.0-beta.1.2.0": {
       "aurelia-metadata": "npm:aurelia-metadata@1.0.0-beta.1.2.0",
       "aurelia-pal": "npm:aurelia-pal@1.0.0-beta.1.2.0",

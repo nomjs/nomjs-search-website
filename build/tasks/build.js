@@ -36,11 +36,12 @@ gulp.task('build-html', function() {
 gulp.task('build-css', function() {
   gulp.src(paths.style)
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(paths.output + '/styles'));
+    .pipe(gulp.dest(paths.output))
+    .pipe(browserSync.stream());
 });
 
-// copies changed css files to the output directory
-// gulp.task('build-css', function() {
+// old task for reference
+// gulp.task('build-css-old', function() {
 //   return gulp.src(paths.css)
 //     .pipe(changed(paths.output, {extension: '.css'}))
 //     .pipe(gulp.dest(paths.output))
