@@ -32,11 +32,13 @@ gulp.task('build-html', function() {
     .pipe(gulp.dest(paths.output));
 });
 
-// compiles sass and copies css to the output directory
+// compiles sass and copies css to the source directory
+// because link rel from index.html only works from there
+// TODO #1 source maps
 gulp.task('build-css', function() {
   gulp.src(paths.style)
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest(paths.output))
+    .pipe(gulp.dest(paths.css))
     .pipe(browserSync.stream());
 });
 
