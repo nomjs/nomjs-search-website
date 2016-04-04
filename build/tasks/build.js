@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var runSequence = require('run-sequence');
 var changed = require('gulp-changed');
 var plumber = require('gulp-plumber');
@@ -31,13 +32,20 @@ gulp.task('build-html', function() {
     .pipe(gulp.dest(paths.output));
 });
 
-// copies changed css files to the output directory
+// compiles sass and copies css to the output directory
 gulp.task('build-css', function() {
-  return gulp.src(paths.css)
-    .pipe(changed(paths.output, {extension: '.css'}))
-    .pipe(gulp.dest(paths.output))
-    .pipe(browserSync.stream());
+  gulp.src(paths.style)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(paths.output + '/styles'));
 });
+
+// copies changed css files to the output directory
+// gulp.task('build-css', function() {
+//   return gulp.src(paths.css)
+//     .pipe(changed(paths.output, {extension: '.css'}))
+//     .pipe(gulp.dest(paths.output))
+//     .pipe(browserSync.stream());
+// });
 
 // this task calls the clean task (located
 // in ./clean.js), then runs the build-system
