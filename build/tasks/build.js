@@ -37,6 +37,8 @@ gulp.task('build-html', function() {
 gulp.task('build-css', function() {
   gulp.src(paths.style)
     .pipe(sourcemaps.init())
+    // TODO #1 only compress on bundle for prod
+    // .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css))
