@@ -1,0 +1,10 @@
+// vendor
+@import 'jspm_packages/github/twbs/bootstrap-sass@3.3.6/assets/stylesheets/_bootstrap';
+
+// app
+@import 'splash';
+@import 'app';
+@import 'navbar';
+@import 'animations';
+
+@import 'welcome';

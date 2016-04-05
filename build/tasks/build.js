@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var runSequence = require('run-sequence');
 var changed = require('gulp-changed');
 var plumber = require('gulp-plumber');
@@ -31,11 +32,23 @@ gulp.task('build-html', function() {
     .pipe(gulp.dest(paths.output));
 });
 
-// copies changed css files to the output directory
+// compiles sass and copies css to the source directory
+// because link rel from index.html only works from there
 gulp.task('build-css', function() {
-  return gulp.src(paths.css)
-    .pipe(changed(paths.output, {extension: '.css'}))
-    .pipe(gulp.dest(paths.output))
+  gulp.src(paths.style)
+    .pipe(sourcemaps.init())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(paths.css))
+    .pipe(browserSync.stream());
+});
+
+gulp.task('build-css-min', function() {
+  gulp.src(paths.style)
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(paths.css))
     .pipe(browserSync.stream());
 });
 
@@ -47,6 +60,14 @@ gulp.task('build', function(callback) {
   return runSequence(
     'clean',
     ['build-system', 'build-html', 'build-css'],
+    callback
+  );
+});
+
+gulp.task('build-min', function(callback) {
+  return runSequence(
+    'clean',
+    ['build-system', 'build-html', 'build-css-min'],
     callback
   );
 });

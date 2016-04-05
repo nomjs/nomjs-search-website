@@ -1,10 +1,20 @@
+# dependencies
 node_modules
 jspm_packages
 bower_components
+
+# ide
 .idea
 .DS_STORE
+
+# build
 /dist
 build/reports
+export
+
+# generated
+styles/styles.css
+
+# test
 coverage
 test/e2e/dist
-export

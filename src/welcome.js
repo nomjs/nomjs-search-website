@@ -4,7 +4,7 @@ import 'fetch';
 
 @inject(HttpClient)
 export class Welcome {
-  heading = 'Welcome to the nomjs!';
+  heading = 'Welcome to nomjs!';
   firstName = 'John';
   lastName = 'Doe';
   previousValue = this.fullName;
