@@ -9,7 +9,7 @@ var config = {
   bundles: bundles.bundles
 };
 
-gulp.task('bundle', ['build'], function() {
+gulp.task('bundle', ['build-min'], function() {
   return bundler.bundle(config);
 });
 
