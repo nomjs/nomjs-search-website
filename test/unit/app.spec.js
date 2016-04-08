@@ -25,10 +25,10 @@ describe('the App module', () => {
   });
 
   it('configures the router title', () => {
-    expect(sut.router.title).toEqual('nomjs');
+    expect(sut.router.title).toEqual('nom is not npm');
   });
 
-  it('should have a welcome route', () => {
-    expect(sut.router.routes).toContain({ route: ['', 'welcome'], name: 'welcome',  moduleId: 'welcome', nav: true, title: 'Welcome' });
+  it('should have a home route', () => {
+    expect(sut.router.routes).toContain({ route: ['', 'home'], name: 'home',  moduleId: 'home/home', nav: false, title: 'Home' });
   });
 });
