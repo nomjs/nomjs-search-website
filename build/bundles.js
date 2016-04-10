@@ -1,10 +1,19 @@
 module.exports = {
   "bundles": {
     "dist/app-build": {
+      // "includes": [
+      //   "[*.js]",
+      //   "*.html!text",
+      //   "*.css!text"
+      // ],
       "includes": [
-        "[*.js]",
-        "*.html!text",
-        "*.css!text"
+        "[app.js]",
+        "[app.html!text]",
+        "[nav-bar.html!text]",
+        "[main.js]",
+        "[*/**/*.js]",
+        "*/**/*.html!text",
+        "*/**/*.css!text"
       ],
       "options": {
         "inject": true,
@@ -26,7 +35,10 @@ module.exports = {
         "aurelia-templating-router",
         "aurelia-loader-default",
         "aurelia-history-browser",
-        "aurelia-logging-console"
+        "aurelia-logging-console",
+        "text",
+        "sanitize-html",
+        "devbridge-autocomplete"
       ],
       "options": {
         "inject": true,
