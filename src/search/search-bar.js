@@ -1,13 +1,14 @@
 import {inject} from 'aurelia-framework';
 import $ from 'jquery';
 import 'devbridge-autocomplete';
-import sanitizeHtml from 'sanitize-html';
+import {SuggestionService} from './suggestion-service';
 
 // Autocomplete provided by https://github.com/devbridge/jQuery-Autocomplete
-@inject(Element)
+@inject(Element, SuggestionService)
 export class SearchBarCustomElement {
-  constructor(element) {
+  constructor(element, suggestionService) {
     this.element = element;
+    this.suggestionService = suggestionService;
   }
 
   attached() {
@@ -28,15 +29,8 @@ export class SearchBarCustomElement {
     ];
   }
 
-  // TODO Move some of this logic to suggestion service
   formatResult(suggestion, currentValue) {
-    let sanitizeOpts = {
-      allowedTags: [],
-      allowedAttributes: []
-    };
-    let line1 = $.Autocomplete.formatResult(suggestion, currentValue);
-    let line2 = sanitizeHtml(suggestion.data.description, sanitizeOpts);
-    return `${line1} <br> ${line2}`;
+    return this.suggestionService.formatSuggestion(suggestion, currentValue);
   }
 
   // Future: Navigate to package detail page
