@@ -28,13 +28,13 @@ export class SearchBarCustomElement {
     ];
   }
 
-  // TODO Move sanitizing to suggestion service
+  // TODO Move some of this logic to suggestion service
   formatResult(suggestion, currentValue) {
     let sanitizeOpts = {
       allowedTags: [],
       allowedAttributes: []
     };
-    let line1 = sanitizeHtml(suggestion.value, sanitizeOpts);
+    let line1 = $.Autocomplete.formatResult(suggestion, currentValue);
     let line2 = sanitizeHtml(suggestion.data.description, sanitizeOpts);
     return `${line1} <br> ${line2}`;
   }
