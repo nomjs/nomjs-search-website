@@ -2,6 +2,7 @@ import {inject} from 'aurelia-framework';
 import $ from 'jquery';
 import 'devbridge-autocomplete';
 
+// Autocomplete provided by https://github.com/devbridge/jQuery-Autocomplete
 @inject(Element)
 export class SearchBarCustomElement {
   constructor(element) {
@@ -9,27 +10,30 @@ export class SearchBarCustomElement {
   }
 
   attached() {
-    // TODO serviceUrl, for now, just some static lookup data
     $('#packageSearch').autocomplete({
-      onSearchComplete: this.onSearchComplete.bind(this),
       onSelect: this.onSelect.bind(this),
-      lookup: this.localPackages()
+      lookup: this.localPackages(),   // TODO replace with ajax serviceUrl
+      formatResult: this.formatResult.bind(this)
     });
   }
 
+  // Taking a guess at what search response might look like
   localPackages() {
     return [
-      { value: '@aaa/aaa', data: '/aaa' },
-      { value: '@bbb/bbb', data: '/bbb' },
-      { value: '@aaabbb/bbb', data: '/bbb' }
+      { value: '@aaa/aaa', data: { scope: '@aaa', name: 'aaa', description: 'The aaa module'} },
+      { value: '@aaa/foo', data: { scope: '@aaa', name: 'foo', description: 'The foo module'} },
+      { value: '@bbb/foo', data: { scope: '@bbb', name: 'foo', description: 'Look at that, bbb also has a foo'} }
     ];
   }
 
-  onSearchComplete(query, suggestions) {
-    console.log(`${query} ${suggestions}`);
-  }
-
+  // Future: Navigate to package detail page
   onSelect(suggestion) {
     console.log(`you suggested ${suggestion.value}, ${suggestion.data}`);
+  }
+
+  // TODO Can aurelia templating be used and does it sanitize?
+  // http://ilikekillnerds.com/2016/01/enhancing-at-will-using-aurelias-templating-engine-enhance-api/
+  formatResult(suggestion, currentValue) {
+    return `${suggestion.value} <br> ${suggestion.data.description}`;
   }
 }
