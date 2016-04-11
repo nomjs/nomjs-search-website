@@ -1,14 +1,16 @@
 import {inject} from 'aurelia-framework';
+import {Router} from 'aurelia-router';
 import $ from 'jquery';
 import 'devbridge-autocomplete';
 import {SuggestionService} from './suggestion-service';
 
 // Autocomplete provided by https://github.com/devbridge/jQuery-Autocomplete
-@inject(Element, SuggestionService)
+@inject(Element, SuggestionService, Router)
 export class SearchBarCustomElement {
-  constructor(element, suggestionService) {
+  constructor(element, suggestionService, router) {
     this.element = element;
     this.suggestionService = suggestionService;
+    this.router = router;
   }
 
   attached() {
@@ -33,8 +35,8 @@ export class SearchBarCustomElement {
     return this.suggestionService.formatSuggestion(suggestion, currentValue);
   }
 
-  // Future: Navigate to package detail page
   onSelect(suggestion) {
-    // console.log(`you suggested ${suggestion.value}, ${suggestion.data}`);
+    let url = this.router.generate('package', {name: encodeURIComponent(suggestion.value)});
+    this.router.navigate(url);
   }
 }
