@@ -9,6 +9,11 @@
   white-space: nowrap;
   overflow: hidden;
   border-bottom: 1px solid #eee;
+
+  .suggestion-sub {
+    margin-left: 5px;
+    color: lighten($text-color, 30%);
+  }
 }
 
 .autocomplete-selected {

@@ -17,6 +17,6 @@ export class SuggestionService {
   formatSuggestion(suggestion, currentValue) {
     let line1 = $.Autocomplete.formatResult(suggestion, currentValue);
     let line2 = this.santizeText(suggestion.data.description);
-    return `${line1} <br> ${line2}`;
+    return `${line1}<div class="suggestion-sub">${line2}</div>`;
   }
  }
