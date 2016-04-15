@@ -13,6 +13,8 @@ export class SearchBarCustomElement {
     this.router = router;
   }
 
+  // TODO Imitate search data from https://registry.npmjs.org/-/_view/byKeyword?startkey=['express']&endkey=['express',{}]&group_level=3
+  // Reference: http://stackoverflow.com/questions/13657140/how-to-get-all-npm-packages-that-match-a-particular-keyword-in-json-format
   attached() {
     $('#packageSearch').autocomplete({
       lookup: this.localPackages(),   // TODO replace with ajax serviceUrl
