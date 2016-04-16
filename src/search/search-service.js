@@ -4,6 +4,8 @@ import 'fetch';
 
 @inject(HttpClient)
 export class SearchService {
+  SERVICE_URL = '/sample-data/search.json'
+
   constructor(http) {
     this.http = http;
   }
