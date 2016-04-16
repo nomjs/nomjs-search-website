@@ -11,17 +11,17 @@ export class SearchService {
     this.http = http;
   }
 
-  // TODO Implement actual transformation of registry results
-  transform(results) {
-    let transformed = {
-      suggestions: [
-        { value: '@aaa/aaa', data: {name: '@aaa/aaa', description: 'The aaa module'} },
-        { value: '@aaa/foo', data: {name: '@aaa/foo', description: 'The foo module'} },
-        { value: '@bbb/foo', data: {name: '@bbb/foo', description: 'Look at that, bbb also has a foo'} },
-        { value: '@john/aaa-api', data: {name: '@john/aaa-api', description: 'This has some html <br> that should be <a href="http://go-there">sanitized</a>'} }
-      ]
-    };
-    return transformed;
+  transform(searchResponse) {
+    let suggestions = searchResponse.rows.map( (sr) => {
+      return {
+        value: sr.key[1],
+        data: {
+          name: sr.key[1],
+          description: sr.key[2]
+        }
+      };
+    });
+    return { suggestions: suggestions };
   }
 
   searchPackage(query) {
