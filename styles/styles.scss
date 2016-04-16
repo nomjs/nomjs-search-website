@@ -4,7 +4,12 @@
 // app
 @import 'splash';
 @import 'app';
-@import 'navbar';
 @import 'animations';
 
+// components
+@import 'navbar';
+@import 'autocomplete';
+@import 'search-bar';
+
+// views
 @import 'welcome';
