@@ -15,10 +15,10 @@ export class SearchService {
   transform(results) {
     let transformed = {
       suggestions: [
-        { value: '@aaa/aaa', data: { scope: '@aaa', name: 'aaa', description: 'The aaa module'} },
-        { value: '@aaa/foo', data: { scope: '@aaa', name: 'foo', description: 'The foo module'} },
-        { value: '@bbb/foo', data: { scope: '@bbb', name: 'foo', description: 'Look at that, bbb also has a foo'} },
-        { value: '@john/aaa-api', data: { scope: '@john', name: 'aaa-api', description: 'This has some html <br> that should be <a href="http://go-there">sanitized</a>'} }
+        { value: '@aaa/aaa', data: {name: '@aaa/aaa', description: 'The aaa module'} },
+        { value: '@aaa/foo', data: {name: '@aaa/foo', description: 'The foo module'} },
+        { value: '@bbb/foo', data: {name: '@bbb/foo', description: 'Look at that, bbb also has a foo'} },
+        { value: '@john/aaa-api', data: {name: '@john/aaa-api', description: 'This has some html <br> that should be <a href="http://go-there">sanitized</a>'} }
       ]
     };
     return transformed;
