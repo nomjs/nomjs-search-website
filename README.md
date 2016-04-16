@@ -1,5 +1,7 @@
 # nomjs search website
 
+[![Build Status](https://travis-ci.org/nomjs/nomjs-search-website.svg?branch=master)](https://travis-ci.org/nomjs/nomjs-search-website)
+
 ## Running The App
 
 To run the app, follow these steps.
