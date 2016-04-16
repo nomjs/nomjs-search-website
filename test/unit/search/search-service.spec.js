@@ -13,6 +13,7 @@ describe('SearchService', () => {
     };
     it('transforms nom registry search results to autocomplete results', () => {
       // Given
+      let query = 'koa';
       let searchResponse = {
         rows: [{
           key: ['koa', 'ac-koa', 'Modules for building Atlassian Connect and HipChat Connect add-ons'],
@@ -26,7 +27,7 @@ describe('SearchService', () => {
         }]
       };
       // When
-      let transformed = searchService.transform(searchResponse);
+      let transformed = searchService.transform(query, searchResponse);
       // Then
       expect(transformed.suggestions.length).toEqual(3);
       verifyResult(transformed.suggestions[0], 'ac-koa', 'ac-koa', 'Modules for building Atlassian Connect and HipChat Connect add-ons');
@@ -35,11 +36,12 @@ describe('SearchService', () => {
     });
     it('returns empty autocomplete list when registry search results are empty', () => {
       // Given
+      let query = 'koa';
       let searchResponse = {
         rows: []
       };
       // When
-      let transformed = searchService.transform(searchResponse);
+      let transformed = searchService.transform(query, searchResponse);
       // Then
       expect(transformed.suggestions.length).toEqual(0);
     });

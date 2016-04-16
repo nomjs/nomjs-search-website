@@ -11,8 +11,16 @@ export class SearchService {
     this.http = http;
   }
 
-  transform(searchResponse) {
-    let suggestions = searchResponse.rows.map( (sr) => {
+  // TODO Remove this when nom registry search endpoint is available
+  tempClientFilter(rows, query) {
+    return rows.filter( (r) => {
+      return r.key[1].includes(query);
+    });
+  }
+
+  transform(query, searchResponse) {
+    let filteredRows = this.tempClientFilter(searchResponse.rows, query);
+    let suggestions = filteredRows.map( (sr) => {
       return {
         value: sr.key[1],
         data: {
@@ -27,6 +35,6 @@ export class SearchService {
   searchPackage(query) {
     return this.http.fetch(`${this.SERVICE_URL}?query=${query}`)
       .then(response => response.json())
-      .then(results => this.transform(results));
+      .then(results => this.transform(query, results));
   }
 }
