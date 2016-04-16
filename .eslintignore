@@ -1,2 +1,3 @@
 config.js
 build/bundles.js
+test/unit/phantomjs-shim.js
