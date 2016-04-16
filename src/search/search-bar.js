@@ -15,28 +15,21 @@ export class SearchBarCustomElement {
     this.router = router;
   }
 
-  // TODO implement custom lookup function so xhr can be handled by a service
   attached() {
     $('#packageSearch').autocomplete({
-      serviceUrl: this.searchService.SERVICE_URL,
-      transformResult: this.transformResult.bind(this),
+      lookup: this.lookup.bind(this),
       formatResult: this.formatResult.bind(this),
       onSelect: this.onSelect.bind(this)
     });
   }
 
-  transformResult(response, originalQuery) {
-    // TODO delegate to search (or suggestion?) service to transform response
-    // temp return the sample data to verify xhr flow is correct
-    let transformed = {
-      suggestions: [
-        { value: '@aaa/aaa', data: { scope: '@aaa', name: 'aaa', description: 'The aaa module'} },
-        { value: '@aaa/foo', data: { scope: '@aaa', name: 'foo', description: 'The foo module'} },
-        { value: '@bbb/foo', data: { scope: '@bbb', name: 'foo', description: 'Look at that, bbb also has a foo'} },
-        { value: '@john/aaa-api', data: { scope: '@john', name: 'aaa-api', description: 'This has some html <br> that should be <a href="http://go-there">sanitized</a>'} }
-      ]
-    };
-    return transformed;
+  detached() {
+    $('#packageSearch').autocomplete('dispose');
+  }
+
+  lookup(query, done) {
+    this.searchService.searchPackage(query)
+      .then( (results) => done(results) );
   }
 
   formatResult(suggestion, currentValue) {
