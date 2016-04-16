@@ -1,5 +1,7 @@
 # nomjs search website
 
+[![Build Status](https://travis-ci.org/nomjs/nomjs-search-website.svg?branch=master)](https://travis-ci.org/nomjs/nomjs-search-website)
+
 ## Running The App
 
 To run the app, follow these steps.
@@ -38,31 +40,6 @@ To run the app, follow these steps.
 7. Browse to [http://localhost:9000](http://localhost:9000) to see the app. You can make changes in the code found under `src` and the browser should auto-refresh itself as you save files.
 
 > The Skeleton App uses [BrowserSync](http://www.browsersync.io/) for automated page refreshes on code/markup changes concurrently across multiple browsers. If you prefer to disable the mirroring feature set the [ghostMode option](http://www.browsersync.io/docs/options/#option-ghostMode) to false
-
-## Running The App under Electron
-
-To run the app under [Electron](http://electron.atom.io), follow these steps.
-
-1. Install [Electron](http://electron.atom.io)
-
-  ```shell
-  npm install electron-prebuilt -g
-  ```
-2. To start the app, execute the following command:
-
-  ```shell
-  electron index.js
-  ```
->**Note:** If you use electron every time or are packaging and so-forth, Then change this line in package.json from
-`"main": "dist/main.js",` to `"main": "index.js",`
-Build the app (this will give you a dist directory)
-```shell
-gulp build
-```
-To start the app, execute the following command:
-```shell
-   electron .
-```
 
 
 ## Bundling

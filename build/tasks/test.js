@@ -27,7 +27,8 @@ gulp.task('cover', function(done) {
   new Karma({
     configFile: __dirname + '/../../karma.conf.js',
     singleRun: true,
-    reporters: ['coverage'],
+    browsers: ['PhantomJS'],
+    reporters: ['coverage', 'spec'],
     preprocessors: {
       'test/**/*.js': ['babel'],
       'src/**/*.js': ['babel', 'coverage']
