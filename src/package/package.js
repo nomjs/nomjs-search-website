@@ -1,11 +1,14 @@
+import {inject} from 'aurelia-framework';
+import {PackageService} from './package-service';
+
+@inject(PackageService)
 export class Package {
-  constructor() { }
+  constructor(packageService) {
+    this.packageService = packageService;
+  }
 
   activate(params) {
-    // TODO get package from nomjs-registry, by name?
-    // for now, just build it from params
-    this.package = {
-      name: decodeURIComponent(params.name)
-    };
+    return this.packageService.retrievePackage(params.name)
+      .then( result => this.package = result);
   }
 }
