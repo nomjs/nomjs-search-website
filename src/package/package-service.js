@@ -8,15 +8,14 @@ export class PackageService {
     this.http = http;
   }
 
+  // any processing needed or just dump the whole json in the view model?
   transform(result) {
-    // any processing needed or just dump the whole json in the view model?
     return result;
   }
 
-  // TODO nom returns 308 redirect to npm couch db but that fails on CORS
-  // consider instead a nom endpoint that proxies to npm and returns the response instead
+  // This works given that nom-registry has implemented: feature/2-endpoint-package-info-no-redirect
   retrievePackage(name) {
-    return this.http.fetch(`/api/${name}`)
+    return this.http.fetch(`/api/${name}?proxynpm=true`)
       .then(response => response.json())
       .then(result => this.transform(result));
   }
