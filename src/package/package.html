@@ -4,8 +4,19 @@
   <search-bar></search-bar>
 
   <div class="container">
-    <h3>Package details:</h3>
-    <p>${package.name}</p>
-    <p>${package.description}</p>
+
+    <!-- Main package information -->
+    <div class="col-md-8">
+      <h2>${package.name}</h2>
+      <h3>${package.description}</h3>
+      <!-- TODO Markdown parser (custom el or attr?) -->
+      <p>${package.readme}</p>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-md-4">
+      <a href="${package.repository.url}">${package.repository.url}</a>
+    </div>
+
   </div>
 </template>
