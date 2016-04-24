@@ -1,4 +1,4 @@
-export class PageObjectSkeleton {
+export class HomePageObject {
 
   constructor() {
 
