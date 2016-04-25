@@ -1,5 +1,6 @@
 <template>
   <require from="../search/search-bar"></require>
+  <require from="../markdown/markdown-to-html"></require>
 
   <search-bar></search-bar>
 
@@ -9,8 +10,7 @@
     <div class="col-md-8">
       <h2>${package.name}</h2>
       <h3>${package.description}</h3>
-      <!-- TODO Markdown parser (custom el or attr?) -->
-      <p>${package.readme}</p>
+      <markdown-to-html content.bind="package.readme"></markdown-to-html>
     </div>
 
     <!-- Sidebar -->
