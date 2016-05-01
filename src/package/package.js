@@ -1,5 +1,7 @@
-import {inject} from 'aurelia-framework';
+import {inject, LogManager} from 'aurelia-framework';
 import {PackageService} from './package-service';
+
+let logger = LogManager.getLogger('Package');
 
 @inject(PackageService)
 export class Package {
@@ -9,6 +11,12 @@ export class Package {
 
   activate(params) {
     return this.packageService.retrievePackage(params.name)
-      .then( result => this.package = result);
+      .then( result => this.package = result)
+      .catch(err => {
+        err.json().then(errObj => {
+          logger.error(errObj.error);
+          // navigate to no results found page?
+        });
+      });
   }
 }

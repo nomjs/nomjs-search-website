@@ -5,6 +5,10 @@ import 'fetch';
 @inject(HttpClient)
 export class PackageService {
   constructor(http) {
+    http.configure(config => {
+      config
+        .useStandardConfiguration();
+    });
     this.http = http;
   }
 
@@ -15,8 +19,9 @@ export class PackageService {
 
   // This works given that nom-registry has implemented: feature/2-endpoint-package-info-no-redirect
   retrievePackage(name) {
-    return this.http.fetch(`/api/${name}?proxynpm=true`)
+    return this.http.fetch(`api/${name}?proxynpm=true`)
       .then(response => response.json())
       .then(result => this.transform(result));
+      // don't catch errors here because then there's no way for the view model to deal with it
   }
 }

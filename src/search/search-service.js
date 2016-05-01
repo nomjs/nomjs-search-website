@@ -5,9 +5,13 @@ import 'fetch';
 @inject(HttpClient)
 export class SearchService {
   // TODO Replace with nom registry api endpoint when implemented
-  SERVICE_URL = '/sample-data/search.json'
+  SERVICE_URL = 'fake-api/sample-data/search.json'
 
   constructor(http) {
+    http.configure(config => {
+      config
+        .useStandardConfiguration();
+    });
     this.http = http;
   }
 

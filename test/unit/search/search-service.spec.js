@@ -2,8 +2,12 @@ import {SearchService} from '../../../src/search/search-service';
 
 describe('SearchService', () => {
   let searchService;
+  let mockHttp;
   beforeEach(() => {
-    searchService = new SearchService();
+    mockHttp = {
+      configure: function() {}
+    };
+    searchService = new SearchService(mockHttp);
   });
   describe('transform', () => {
     let verifyResult = function(result, expectedValue, expectedName, expectedDescription) {

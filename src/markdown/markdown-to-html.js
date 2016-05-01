@@ -10,6 +10,10 @@ export class MarkdownToHtml {
   }
 
   contentChanged() {
-    this.toMarkdown = markdown.toHTML(this.content);
+    if (this.content) {
+      this.toMarkdown = markdown.toHTML(this.content);
+    } else {
+      this.toMarkdown = 'No README available.';
+    }
   }
 }
