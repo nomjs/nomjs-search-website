@@ -26,6 +26,7 @@ System.config({
     "font-awesome": "npm:font-awesome@4.5.0",
     "jquery": "npm:jquery@2.2.3",
     "markdown": "npm:markdown@0.5.0",
+    "moment": "npm:moment@2.13.0",
     "sanitize-html": "npm:sanitize-html@1.11.4",
     "text": "github:systemjs/plugin-text@0.0.3",
     "github:jspm/nodelibs-assert@0.1.0": {

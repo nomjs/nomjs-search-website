@@ -1,6 +1,7 @@
 <template>
   <require from="../search/search-bar"></require>
   <require from="../markdown/markdown-to-html"></require>
+  <require from="./date-humanize"></require>
 
   <search-bar></search-bar>
 
@@ -15,7 +16,12 @@
 
     <!-- Sidebar -->
     <div class="col-md-4">
-      <a href="${package.repository.url}">${package.repository.url}</a>
+      <div class="side-bar-line">
+        <a href="${package.repository.url}">${package.repository.url}</a>
+      </div>
+      <div class="side-bar-line">
+        published ${package.time.modified | dateHumanize}
+      </div>
     </div>
 
   </div>
