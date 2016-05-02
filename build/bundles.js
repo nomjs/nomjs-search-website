@@ -33,7 +33,9 @@ module.exports = {
         "aurelia-logging-console",
         "text",
         "sanitize-html",
-        "devbridge-autocomplete"
+        "devbridge-autocomplete",
+        "markdown",
+        "moment"
       ],
       "options": {
         "inject": true,
