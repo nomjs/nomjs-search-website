@@ -40,4 +40,9 @@ export class SearchBarCustomElement {
     let url = this.router.generate('package', {name: encodeURIComponent(suggestion.value)});
     this.router.navigate(url);
   }
+
+  login(evt) {
+    evt.preventDefault();
+    // TODO http GET from here or via nomjs-registry GET https://github.com/login/oauth/authorize
+  }
 }
