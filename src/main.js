@@ -2,19 +2,12 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {AppConfig} from './app-config';
 
 export function configure(aurelia) {
+  let httpClient = aurelia.container.get(HttpClient);
+  let appConfig = aurelia.container.get(AppConfig);
   aurelia.use
     .standardConfiguration()
     .developmentLogging();
 
-  //Uncomment the line below to enable animation.
-  //aurelia.use.plugin('aurelia-animator-css');
-  //if the css animator is enabled, add swap-order="after" to all router-view elements
-
-  //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  //aurelia.use.plugin('aurelia-html-import-template-loader')
-
-  let httpClient = new HttpClient();
-  let appConfig = aurelia.container.get(AppConfig);
   httpClient.fetch('api/-/config')
     .then(response => response.json())
     .then(config => {
