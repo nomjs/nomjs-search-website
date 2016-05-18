@@ -1,4 +1,4 @@
-// import {HttpClient} from 'aurelia-fetch-client';
+import {HttpClient} from 'aurelia-fetch-client';
 
 export function configure(aurelia) {
   aurelia.use
@@ -12,14 +12,10 @@ export function configure(aurelia) {
   //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
   //aurelia.use.plugin('aurelia-html-import-template-loader')
 
-  // TODO After config endpoint is available in nom-registry, load it here before app startup
-  // It will have information like github oauth url
-  // Proof of concept to verify can make http call before app startup
-  // let httpClient = new HttpClient();
-  // httpClient.fetch('https://api.github.com/users')
-  //   .then(response => response.json())
-  //   .then(users => {
-  //     aurelia.start().then(() => aurelia.setRoot());
-  //   });
-  aurelia.start().then(() => aurelia.setRoot());
+  let httpClient = new HttpClient();
+  httpClient.fetch('api/-/config')
+    .then(response => response.json())
+    .then(config => {
+      aurelia.start().then(() => aurelia.setRoot());
+    });
 }
