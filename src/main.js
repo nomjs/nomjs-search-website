@@ -1,4 +1,5 @@
 import {HttpClient} from 'aurelia-fetch-client';
+import {AppConfig} from './app-config';
 
 export function configure(aurelia) {
   aurelia.use
@@ -13,9 +14,11 @@ export function configure(aurelia) {
   //aurelia.use.plugin('aurelia-html-import-template-loader')
 
   let httpClient = new HttpClient();
+  let appConfig = aurelia.container.get(AppConfig);
   httpClient.fetch('api/-/config')
     .then(response => response.json())
     .then(config => {
+      appConfig.config = config;
       aurelia.start().then(() => aurelia.setRoot());
     });
 }
