@@ -4,24 +4,18 @@ import $ from 'jquery';
 import 'devbridge-autocomplete';
 import {SearchService} from './search-service';
 import {SuggestionService} from './suggestion-service';
-import {AppConfig} from '../app-config';
+import {LoginService} from './login-service';
 
 // Autocomplete provided by https://github.com/devbridge/jQuery-Autocomplete
-@inject(Element, SearchService, SuggestionService, Router, AppConfig)
+@inject(Element, SearchService, SuggestionService, Router, LoginService)
 export class SearchBarCustomElement {
-  constructor(element, searchService, suggestionService, router, appConfig) {
+  constructor(element, searchService, suggestionService, router, loginService) {
     this.element = element;
     this.searchService = searchService;
     this.suggestionService = suggestionService;
     this.router = router;
-    this.appConfig = appConfig;
-    this.loginUrl = this.initLoginUrl(this.appConfig);
-  }
-
-  initLoginUrl(appConfig) {
-    // TODO what scopes are needed? Maybe server side config should provide this information...
-    // let scopes = 'user:email';
-    return `https://github.com/login/oauth/authorize?scope=user:email&client_id=${appConfig.config.githubOauthClientId}`;
+    this.loginService = loginService;
+    this.loginUrl = loginService.buildLoginUrl();
   }
 
   attached() {

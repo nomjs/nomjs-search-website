@@ -1,5 +1,8 @@
 import {HttpClient} from 'aurelia-fetch-client';
+import {LogManager} from 'aurelia-framework';
 import {AppConfig} from './app-config';
+
+const logger = LogManager.getLogger('main');
 
 export function configure(aurelia) {
   let httpClient = aurelia.container.get(HttpClient);
@@ -13,5 +16,8 @@ export function configure(aurelia) {
     .then(config => {
       appConfig.config = config;
       aurelia.start().then(() => aurelia.setRoot());
+    })
+    .catch(err => {
+      logger.error('Unable to configure application.', err);
     });
 }
