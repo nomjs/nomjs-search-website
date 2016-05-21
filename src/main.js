@@ -1,14 +1,23 @@
+import {HttpClient} from 'aurelia-fetch-client';
+import {LogManager} from 'aurelia-framework';
+import {AppConfig} from './app-config';
+
+const logger = LogManager.getLogger('main');
+
 export function configure(aurelia) {
+  let httpClient = aurelia.container.get(HttpClient);
+  let appConfig = aurelia.container.get(AppConfig);
   aurelia.use
     .standardConfiguration()
     .developmentLogging();
 
-  //Uncomment the line below to enable animation.
-  //aurelia.use.plugin('aurelia-animator-css');
-  //if the css animator is enabled, add swap-order="after" to all router-view elements
-
-  //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  //aurelia.use.plugin('aurelia-html-import-template-loader')
-
-  aurelia.start().then(() => aurelia.setRoot());
+  httpClient.fetch('api/-/config')
+    .then(response => response.json())
+    .then(config => {
+      appConfig.config = config;
+      aurelia.start().then(() => aurelia.setRoot());
+    })
+    .catch(err => {
+      logger.error('Unable to configure application.', err);
+    });
 }

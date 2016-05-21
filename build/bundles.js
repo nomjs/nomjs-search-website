@@ -33,7 +33,8 @@ module.exports = {
         "aurelia-logging-console",
         "text",
         "sanitize-html",
-        "devbridge-autocomplete"
+        "devbridge-autocomplete",
+        "node-uuid"
       ],
       "options": {
         "inject": true,
