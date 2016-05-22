@@ -32,6 +32,7 @@ class OauthGithub extends Resource {
         // experiment. obviously the jwt secret would be env var:
         let jwtSecret = '968133BC0BA1E94369467D4BC625CF7AA70DC47E5F3B8B16C4FAECBB76A57618';
         let jwtPayload = { githuOauthAccessToken: response.access_token };
+        // if end up using jwt, should include jit and expiry, defaults here are just for simple example
         let jwtToken = this.jwt.sign(jwtPayload, jwtSecret);
 
         // experiment - pull it back out
@@ -42,6 +43,7 @@ class OauthGithub extends Resource {
           this.log.error('Failed to verify jwt token', err);
         }
 
+        // Experiment ONLY, NOT TO BE USED IN REAL APP!
         // TODO: Search web client url should be env var
         ctx.redirect(`http://localhost:9000/#/package/ravel?jwt=${jwtToken}`);
       })
