@@ -11,7 +11,7 @@ export function configure(aurelia) {
     .standardConfiguration()
     .developmentLogging();
 
-  httpClient.fetch('api/-/config')
+  httpClient.fetch('api/config')
     .then(response => response.json())
     .then(config => {
       appConfig.config = config;

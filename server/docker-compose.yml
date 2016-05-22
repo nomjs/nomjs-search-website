@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  redis:
+    image: redis
+    expose:
+      - 6379
+
+  nomjs-search-server:
+    build: .
+    environment:
+      NODE_ENV: development
+      GITHUB_OAUTH_CLIENT_ID: ${GITHUB_OAUTH_CLIENT_ID}
+      GITHUB_OAUTH_CLIENT_SECRET: ${GITHUB_OAUTH_CLIENT_SECRET}
+    ports:
+      - 9081:9081
+    volumes:
+      - ${PWD}/:/server
+    links:
+      - redis

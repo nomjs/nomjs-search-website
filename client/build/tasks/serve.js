@@ -7,9 +7,9 @@ var proxy = require('proxy-middleware');
 
 // this task utilizes the browsersync plugin
 // to create a dev server instance at http://localhost:9000
-// api requests are proxied to the nomjs-registry server
+// api requests are proxied to the nomjs-search server
 gulp.task('serve', ['build'], function(done) {
-  var proxyOptions = url.parse('http://0.0.0.0:9080');
+  var proxyOptions = url.parse('http://0.0.0.0:9081');
   proxyOptions.route = '/api';
   gutil.log('Proxy ' + proxyOptions.route + ' --> ' + proxyOptions.href);
   browserSync({
