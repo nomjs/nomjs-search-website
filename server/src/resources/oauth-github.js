@@ -4,6 +4,7 @@ const Ravel = require('ravel');
 const Resource = Ravel.Resource;
 const inject = Ravel.inject;
 
+// TODO Remove when functionality replaced by provider
 @inject('github', 'jsonwebtoken')
 class OauthGithub extends Resource {
   constructor(oauthGithub, jwt) {

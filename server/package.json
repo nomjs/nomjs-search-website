@@ -33,6 +33,7 @@
     "jsonwebtoken": "^7.0.0",
     "koa-better-body": "2.0.1",
     "ravel": "0.13.1",
+    "ravel-github-oauth2-provider": "^0.13.0",
     "request-promise": "3.0.0"
   },
   "devDependencies": {

@@ -10,7 +10,7 @@ class ConfigResource extends Resource {
 
   getAll(ctx) {
     let payload = {
-      githubOauthClientId: this.params.get('github oauth client id')
+      githubOauthClientId: this.params.get('github client id')
     };
     var promise = new Promise((resolve) => {
       resolve(payload);

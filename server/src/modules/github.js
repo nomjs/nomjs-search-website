@@ -4,6 +4,7 @@ const Ravel = require('ravel');
 const inject = Ravel.inject;
 const Module = Ravel.Module;
 
+// FIXME Remove when functionality replaced by provider
 class GithubOauthError extends Ravel.Error {
   constructor(msg) {
     super(msg, constructor, 500);
