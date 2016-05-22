@@ -1,12 +1,8 @@
-# nomjs search website
-
-[![Build Status](https://travis-ci.org/nomjs/nomjs-search-website.svg?branch=master)](https://travis-ci.org/nomjs/nomjs-search-website)
+# nomjs search website: client
 
 ## Running The App
 
 To run the app, follow these steps.
-
-1. Start the nomjs registry locally. Follow the [setup instructions](https://github.com/nomjs/nomjs-registry).
 
 1. Ensure that [NodeJS](http://nodejs.org/) is installed. This provides the platform on which the build tooling runs.
 2. From the project folder, execute the following command:
