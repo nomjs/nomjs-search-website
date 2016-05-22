@@ -15,8 +15,7 @@ node_js:
 
 before_script:
 - npm install -g gulp
+- cd client
 - jspm install
 
-script:
-- cd client
-- gulp cover
+script: gulp cover
