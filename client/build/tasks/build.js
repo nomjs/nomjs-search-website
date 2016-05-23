@@ -61,14 +61,14 @@ gulp.task('build-css-min', function() {
 // TODO figure out timing issue with clean
 gulp.task('copy-public', function(callback) {
   return runSequence(
-    // 'clean-public',
+    'clean-public',
     ['copy-jspm', 'copy-index', 'copy-sample-data'],
     callback
   );
 });
 
 gulp.task('clean-public', function() {
-  return gulp.src(paths.serverPublic)
+  return gulp.src('../server/public')
     .pipe(clean({force: true, read: false}));
 });
 
