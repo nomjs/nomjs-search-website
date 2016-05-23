@@ -55,12 +55,13 @@ gulp.task('build-css-min', function() {
 });
 
 // TODO move to all the copy tasks to separate tasks file
-gulp.task('copy-public', ['clean-public', 'copy-dist', 'copy-index']);
+gulp.task('copy-public', ['clean-public', 'copy-dist', 'copy-index', 'copy-jspm']);
 
+// FIXME not cleaning
 gulp.task('clean-public', function() {
   return new Promise(function(resolve, reject) {
     var vp = vinylPaths();
-    gulp.src([paths.serverPublic])
+    gulp.src([paths.serverPublic + '/**/*'])
       .pipe(vp)
       .on('end', function() {
         del(vp.paths, {force: true}).then(resolve).catch(reject);
@@ -74,8 +75,13 @@ gulp.task('copy-dist', function() {
 });
 
 gulp.task('copy-index', function() {
-  gulp.src('./index.html')
+  gulp.src(['./index.html', './config.js'])
     .pipe(gulp.dest(paths.serverPublic));
+});
+
+gulp.task('copy-jspm', function() {
+  gulp.src('./jspm_packages/**/*')
+    .pipe(gulp.dest(paths.serverPublic + 'jspm_packages/'));
 });
 
 // this task calls the clean task (located
