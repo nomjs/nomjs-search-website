@@ -33,7 +33,7 @@ To run the app, follow these steps.
 6. To run the app, execute the following command:
 
   ```shell
-  gulp watch
+  gulp
   ```
 7. Browse to [http://localhost:9000](http://localhost:9000) to see the app. You can make changes in the code found under `src` and the browser should auto-refresh itself as you save files.
 

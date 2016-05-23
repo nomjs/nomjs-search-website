@@ -4,12 +4,10 @@ var runSequence = require('run-sequence');
 var clean = require('gulp-clean');
 
 /**
- * Copy dependencies, index and source to server public.
- * FIXME Intermittent timing issue copy tasks start before clean is finished
+ * Copy dependencies, index and source to node server public directory.
  */
 gulp.task('public', function(callback) {
   return runSequence(
-    'clean-public',
     ['copy-jspm', 'copy-index', 'copy-sample-data', 'copy-src'],
     callback
   );
