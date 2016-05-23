@@ -10,6 +10,8 @@ var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
 var notify = require('gulp-notify');
 var browserSync = require('browser-sync');
+var del = require('del');
+var vinylPaths = require('vinyl-paths');
 
 // transpiles changed es6 files to SystemJS format
 // the plumber() call prevents 'pipe breaking' caused
@@ -52,9 +54,28 @@ gulp.task('build-css-min', function() {
     .pipe(browserSync.stream());
 });
 
+// TODO move to all the copy tasks to separate tasks file
+gulp.task('copy-public', ['clean-public', 'copy-dist', 'copy-index']);
+
+gulp.task('clean-public', function() {
+  return new Promise(function(resolve, reject) {
+    var vp = vinylPaths();
+    gulp.src([paths.serverPublic])
+      .pipe(vp)
+      .on('end', function() {
+        del(vp.paths, {force: true}).then(resolve).catch(reject);
+      });
+  });
+});
+
 gulp.task('copy-dist', function() {
   gulp.src(paths.output + '**/*')
-    .pipe(gulp.dest(paths.serverPublic + '/dist'));
+    .pipe(gulp.dest(paths.serverPublic + 'dist/'));
+});
+
+gulp.task('copy-index', function() {
+  gulp.src('./index.html')
+    .pipe(gulp.dest(paths.serverPublic));
 });
 
 // this task calls the clean task (located
@@ -64,7 +85,7 @@ gulp.task('copy-dist', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-css', 'copy-dist'],
+    ['build-system', 'build-html', 'build-css', 'copy-public'],
     callback
   );
 });
