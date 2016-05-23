@@ -58,11 +58,10 @@ gulp.task('build-css-min', function() {
     .pipe(browserSync.stream());
 });
 
-// TODO figure out timing issue with clean
 gulp.task('copy-public', function(callback) {
   return runSequence(
     'clean-public',
-    ['copy-jspm', 'copy-index', 'copy-sample-data'],
+    ['copy-jspm', 'copy-index', 'copy-sample-data', 'copy-src'],
     callback
   );
 });
@@ -86,6 +85,11 @@ gulp.task('copy-index', function() {
 gulp.task('copy-jspm', function() {
   gulp.src('./jspm_packages/**/*')
     .pipe(gulp.dest(paths.serverPublic + 'jspm_packages/'));
+});
+
+gulp.task('copy-src', function() {
+  gulp.src(paths.source)
+    .pipe(gulp.dest(paths.serverPublic + 'src/'));
 });
 
 // this task calls the clean task (located

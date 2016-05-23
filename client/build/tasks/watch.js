@@ -12,7 +12,7 @@ function reportChange(event) {
 // reportChange method. Also, by depending on the
 // serve task, it will instantiate a browserSync session
 gulp.task('watch', ['serve', 'copy-public'], function() {
-  gulp.watch(paths.source, ['build-system', browserSync.reload]).on('change', reportChange);
+  gulp.watch(paths.source, ['build-system', 'copy-src', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.html, ['build-html', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.scss, ['build-css', browserSync.reload]).on('change', reportChange);
   gulp.watch(paths.compiledCss, function() {
