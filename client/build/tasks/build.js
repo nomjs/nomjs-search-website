@@ -10,8 +10,9 @@ var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
 var notify = require('gulp-notify');
 var browserSync = require('browser-sync');
-var del = require('del');
-var vinylPaths = require('vinyl-paths');
+var clean = require('gulp-clean');
+// var del = require('del');
+// var vinylPaths = require('vinyl-paths');
 
 // transpiles changed es6 files to SystemJS format
 // the plumber() call prevents 'pipe breaking' caused
@@ -24,14 +25,16 @@ gulp.task('build-system', function() {
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(to5(assign({}, compilerOptions.system())))
     .pipe(sourcemaps.write({includeContent: false, sourceRoot: '/src'}))
-    .pipe(gulp.dest(paths.output));
+    .pipe(gulp.dest(paths.output))
+    .pipe(gulp.dest(paths.serverPublic + 'dist/'));
 });
 
 // copies changed html files to the output directory
 gulp.task('build-html', function() {
   return gulp.src(paths.html)
     .pipe(changed(paths.output, {extension: '.html'}))
-    .pipe(gulp.dest(paths.output));
+    .pipe(gulp.dest(paths.output))
+    .pipe(gulp.dest(paths.serverPublic + 'dist/'));
 });
 
 // compiles sass and copies css to the source directory
@@ -42,6 +45,7 @@ gulp.task('build-css', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css))
+    .pipe(gulp.dest(paths.serverPublic + 'styles/'))
     .pipe(browserSync.stream());
 });
 
@@ -54,24 +58,24 @@ gulp.task('build-css-min', function() {
     .pipe(browserSync.stream());
 });
 
-// TODO move to all the copy tasks to separate tasks file
-gulp.task('copy-public', ['clean-public', 'copy-dist', 'copy-index', 'copy-jspm']);
-
-// FIXME not cleaning
-gulp.task('clean-public', function() {
-  return new Promise(function(resolve, reject) {
-    var vp = vinylPaths();
-    gulp.src([paths.serverPublic + '/**/*'])
-      .pipe(vp)
-      .on('end', function() {
-        del(vp.paths, {force: true}).then(resolve).catch(reject);
-      });
-  });
+// TODO figure out timing issue with clean
+gulp.task('copy-public', function(callback) {
+  return runSequence(
+    // 'clean-public',
+    ['copy-jspm', 'copy-index', 'copy-sample-data'],
+    callback
+  );
 });
 
-gulp.task('copy-dist', function() {
-  gulp.src(paths.output + '**/*')
-    .pipe(gulp.dest(paths.serverPublic + 'dist/'));
+gulp.task('clean-public', function() {
+  return gulp.src(paths.serverPublic)
+    .pipe(clean({force: true, read: false}));
+});
+
+// temporarily needed until real search endpoint is developed
+gulp.task('copy-sample-data', function() {
+  return gulp.src('./sample-data/**/*')
+    .pipe(gulp.dest(paths.serverPublic + 'sample-data'));
 });
 
 gulp.task('copy-index', function() {
@@ -91,7 +95,7 @@ gulp.task('copy-jspm', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-css', 'copy-public'],
+    ['build-system', 'build-html', 'build-css'],
     callback
   );
 });
