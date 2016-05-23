@@ -10,9 +10,6 @@ var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
 var notify = require('gulp-notify');
 var browserSync = require('browser-sync');
-var clean = require('gulp-clean');
-// var del = require('del');
-// var vinylPaths = require('vinyl-paths');
 
 // transpiles changed es6 files to SystemJS format
 // the plumber() call prevents 'pipe breaking' caused
@@ -56,40 +53,6 @@ gulp.task('build-css-min', function() {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css))
     .pipe(browserSync.stream());
-});
-
-gulp.task('copy-public', function(callback) {
-  return runSequence(
-    'clean-public',
-    ['copy-jspm', 'copy-index', 'copy-sample-data', 'copy-src'],
-    callback
-  );
-});
-
-gulp.task('clean-public', function() {
-  return gulp.src('../server/public')
-    .pipe(clean({force: true, read: false}));
-});
-
-// temporarily needed until real search endpoint is developed
-gulp.task('copy-sample-data', function() {
-  return gulp.src('./sample-data/**/*')
-    .pipe(gulp.dest(paths.serverPublic + 'sample-data'));
-});
-
-gulp.task('copy-index', function() {
-  gulp.src(['./index.html', './config.js'])
-    .pipe(gulp.dest(paths.serverPublic));
-});
-
-gulp.task('copy-jspm', function() {
-  gulp.src('./jspm_packages/**/*')
-    .pipe(gulp.dest(paths.serverPublic + 'jspm_packages/'));
-});
-
-gulp.task('copy-src', function() {
-  gulp.src(paths.source)
-    .pipe(gulp.dest(paths.serverPublic + 'src/'));
 });
 
 // this task calls the clean task (located
