@@ -52,6 +52,11 @@ gulp.task('build-css-min', function() {
     .pipe(browserSync.stream());
 });
 
+gulp.task('copy-dist', function() {
+  gulp.src(paths.output + '**/*')
+    .pipe(gulp.dest(paths.serverPublic + '/dist'));
+});
+
 // this task calls the clean task (located
 // in ./clean.js), then runs the build-system
 // and build-html tasks in parallel
@@ -59,7 +64,7 @@ gulp.task('build-css-min', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-css'],
+    ['build-system', 'build-html', 'build-css', 'copy-dist'],
     callback
   );
 });
