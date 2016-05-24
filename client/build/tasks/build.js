@@ -22,14 +22,16 @@ gulp.task('build-system', function() {
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(to5(assign({}, compilerOptions.system())))
     .pipe(sourcemaps.write({includeContent: false, sourceRoot: '/src'}))
-    .pipe(gulp.dest(paths.output));
+    .pipe(gulp.dest(paths.output))
+    .pipe(gulp.dest(paths.serverPublic + 'dist/'));
 });
 
 // copies changed html files to the output directory
 gulp.task('build-html', function() {
   return gulp.src(paths.html)
     .pipe(changed(paths.output, {extension: '.html'}))
-    .pipe(gulp.dest(paths.output));
+    .pipe(gulp.dest(paths.output))
+    .pipe(gulp.dest(paths.serverPublic + 'dist/'));
 });
 
 // compiles sass and copies css to the source directory
@@ -40,6 +42,7 @@ gulp.task('build-css', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.css))
+    .pipe(gulp.dest(paths.serverPublic + 'styles/'))
     .pipe(browserSync.stream());
 });
 

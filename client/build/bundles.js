@@ -3,6 +3,7 @@ module.exports = {
     "dist/app-build": {
       "includes": [
         "[app.js]",
+        "[app-config.js]",
         "[app.html!text]",
         "[nav-bar.html!text]",
         "[main.js]",
