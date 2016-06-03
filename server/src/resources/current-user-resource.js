@@ -8,17 +8,21 @@ class CurrentUserResource extends Resource {
     super('/currentuser');
   }
 
-  // wip...
   getAll(ctx) {
-    // Is there a passport one liner to get the currently logged in user?
-    let sessionId = ctx.request.headers['koa.sid'];
-    this.log.debug(sessionId);
-    var promise = new Promise((resolve) => {
-      resolve({username: 'foo'});
+    let promise = new Promise((resolve, reject) => {
+      if (ctx.req.isAuthenticated()) {
+        resolve({user: ctx.req.user});
+      } else {
+        reject({message: 'no logged in user'});
+      }
     });
     return promise.then(data => {
       ctx.status = 200;
       ctx.body = data;
+    })
+    .catch((err) => {
+      ctx.status = 401;
+      ctx.body = err;
     });
   }
 }
