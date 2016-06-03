@@ -19,6 +19,8 @@ export class SearchBarCustomElement {
   }
 
   attached() {
+    // FIXME: always 401 because client is not sending koa.sid cookie
+    this.loginService.currentUser();
     $('#packageSearch').autocomplete({
       lookup: this.lookup.bind(this),
       formatResult: this.formatResult.bind(this),
