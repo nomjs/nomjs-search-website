@@ -19,7 +19,7 @@ export class SearchBarCustomElement {
   }
 
   attached() {
-    // FIXME: always 401 because client is not sending koa.sid cookie
+    // TODO: Make use of currentUser response to display username instead of login link in navbar
     this.loginService.currentUser();
     $('#packageSearch').autocomplete({
       lookup: this.lookup.bind(this),
