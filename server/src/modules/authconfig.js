@@ -51,11 +51,13 @@ class AuthConfig extends Module {
    */
   verifyCredentials(accessToken, refreshToken, profile) {
     // this.log.debug(`verifyCredentials: ${accessToken}, ${refreshToken}, ${JSON.stringify(profile)}`);
-    return Promise.resolve({
-      id: profile.username,
-      accessToken: accessToken,
-      githubProfile: profile
-    });
+    // return Promise.resolve({
+    //   id: profile.username,
+    //   accessToken: accessToken,
+    //   githubProfile: profile
+    // });
+    profile.id = profile.username;
+    return Promise.resolve(profile);
   }
 }
 
