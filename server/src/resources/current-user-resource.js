@@ -20,9 +20,9 @@ class CurrentUserResource extends Resource {
       ctx.status = 200;
       ctx.body = data;
     })
-    .catch((err) => {
+    .catch(() => {
       ctx.status = 401;
-      ctx.body = err;
+      // ctx.body = err;
     });
   }
 }
