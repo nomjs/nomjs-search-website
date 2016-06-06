@@ -27,13 +27,12 @@ export class SearchBarCustomElement {
   _initUser() {
     this.loginService.currentUser()
       .then(user => {
-        console.dir(user);
         this.user = user;
         this.isUserLoggedIn = true;
       })
       .catch(() => {
-        console.log('NOT logged in');
         this.user = null;
+        this.isUserLoggedIn = false;
       });
   }
 

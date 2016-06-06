@@ -24,8 +24,5 @@ export class LoginService {
         .then(user => resolve(user.user.profile))
         .catch(err => reject(err));
     });
-    // this.http.fetch('currentuser', {credentials: 'include'})
-    //   .then(response => response.json())
-    //   .then(user => user);
   }
 }
