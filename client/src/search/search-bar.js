@@ -16,11 +16,28 @@ export class SearchBarCustomElement {
     this.router = router;
     this.loginService = loginService;
     this.loginUrl = loginService.buildLoginUrl();
+    this.isUserLoggedIn = false;
   }
 
   attached() {
-    // TODO: Make use of currentUser response to display username instead of login link in navbar
-    this.loginService.currentUser();
+    this._initUser();
+    this._initAutoComplete();
+  }
+
+  _initUser() {
+    this.loginService.currentUser()
+      .then(user => {
+        console.dir(user);
+        this.user = user;
+        this.isUserLoggedIn = true;
+      })
+      .catch(() => {
+        console.log('NOT logged in');
+        this.user = null;
+      });
+  }
+
+  _initAutoComplete() {
     $('#packageSearch').autocomplete({
       lookup: this.lookup.bind(this),
       formatResult: this.formatResult.bind(this),

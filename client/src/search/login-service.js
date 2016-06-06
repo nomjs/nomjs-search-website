@@ -17,10 +17,15 @@ export class LoginService {
     return `https://github.com/login/oauth/authorize?scope=${scopes}&state=${state}&client_id=${this.appConfig.config.githubOauthClientId}`;
   }
 
-  // TODO Configure http one-time at app startup to include credentials
   currentUser() {
-    return this.http.fetch('currentuser', {credentials: 'include'})
-      .then(response => response.json())
-      .then(user => user);
+    return new Promise((resolve, reject) => {
+      this.http.fetch('currentuser', {credentials: 'include'})
+        .then(response => response.json())
+        .then(user => resolve(user.user.profile))
+        .catch(err => reject(err));
+    });
+    // this.http.fetch('currentuser', {credentials: 'include'})
+    //   .then(response => response.json())
+    //   .then(user => user);
   }
 }
