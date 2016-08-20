@@ -5,6 +5,9 @@ services:
     image: redis
     expose:
       - 6379
+    ports:
+      # Convenience for development but should not map to host port for production
+      - 6479:6379
 
   nomjs-search-server:
     build: .

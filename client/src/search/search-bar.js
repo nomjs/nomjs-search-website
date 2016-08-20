@@ -4,21 +4,22 @@ import $ from 'jquery';
 import 'devbridge-autocomplete';
 import {SearchService} from './search-service';
 import {SuggestionService} from './suggestion-service';
-import {LoginService} from './login-service';
 
 // Autocomplete provided by https://github.com/devbridge/jQuery-Autocomplete
-@inject(Element, SearchService, SuggestionService, Router, LoginService)
+@inject(Element, SearchService, SuggestionService, Router)
 export class SearchBarCustomElement {
-  constructor(element, searchService, suggestionService, router, loginService) {
+  constructor(element, searchService, suggestionService, router) {
     this.element = element;
     this.searchService = searchService;
     this.suggestionService = suggestionService;
     this.router = router;
-    this.loginService = loginService;
-    this.loginUrl = loginService.buildLoginUrl();
   }
 
   attached() {
+    this._initAutoComplete();
+  }
+
+  _initAutoComplete() {
     $('#packageSearch').autocomplete({
       lookup: this.lookup.bind(this),
       formatResult: this.formatResult.bind(this),

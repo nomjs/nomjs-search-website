@@ -1,0 +1,4 @@
+<template>
+  <a show.bind="!isUserLoggedIn" href.bind="loginUrl">login</a>
+  <a show.bind="isUserLoggedIn" href="#">${user.login}</a>
+</template>
