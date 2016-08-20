@@ -50,12 +50,6 @@ class AuthConfig extends Module {
    * TODO Where to persist accessToken?
    */
   verifyCredentials(accessToken, refreshToken, profile) {
-    // this.log.debug(`verifyCredentials: ${accessToken}, ${refreshToken}, ${JSON.stringify(profile)}`);
-    // return Promise.resolve({
-    //   id: profile.username,
-    //   accessToken: accessToken,
-    //   githubProfile: profile
-    // });
     profile.id = profile.username;
     return Promise.resolve(profile);
   }
