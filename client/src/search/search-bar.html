@@ -1,4 +1,6 @@
 <template>
+  <!-- <require from="components/login/login"></require> -->
+
   <nav class="search-bar navbar navbar-default">
     <div class="container-fluid">
 
@@ -9,8 +11,12 @@
       <!-- To get the search box taking up width of nav and lining up, the right links go first http://www.bootply.com/t7O3HSGlbc -->
       <ul class="nav navbar-nav navbar-right">
         <!-- FIXME flashes login first, because not in a view with activate -->
-        <li><a show.bind="!isUserLoggedIn" href.bind="loginUrl">login</a></li>
-        <li><a show.bind="isUserLoggedIn" href="#">${user.login}</a></li>
+        <!-- <li><a show.bind="!isUserLoggedIn" href.bind="loginUrl">login</a></li>
+        <li><a show.bind="isUserLoggedIn" href="#">${user.login}</a></li> -->
+        <li>
+          <!-- <login></login> -->
+          <compose view="components/login/login.html" view-model="components/login/login" containerless></compose>
+        </li>
       </ul>
 
       <form class="navbar-form" role="search">

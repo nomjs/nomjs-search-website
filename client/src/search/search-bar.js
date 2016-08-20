@@ -4,37 +4,37 @@ import $ from 'jquery';
 import 'devbridge-autocomplete';
 import {SearchService} from './search-service';
 import {SuggestionService} from './suggestion-service';
-import {LoginService} from './login-service';
+// import {LoginService} from './login-service';
 
 // Autocomplete provided by https://github.com/devbridge/jQuery-Autocomplete
-@inject(Element, SearchService, SuggestionService, Router, LoginService)
+@inject(Element, SearchService, SuggestionService, Router)
 export class SearchBarCustomElement {
-  constructor(element, searchService, suggestionService, router, loginService) {
+  constructor(element, searchService, suggestionService, router) {
     this.element = element;
     this.searchService = searchService;
     this.suggestionService = suggestionService;
     this.router = router;
-    this.loginService = loginService;
-    this.loginUrl = loginService.buildLoginUrl();
-    this.isUserLoggedIn = false;
+    // this.loginService = loginService;
+    // this.loginUrl = loginService.buildLoginUrl();
+    // this.isUserLoggedIn = false;
   }
 
   attached() {
-    this._initUser();
+    // this._initUser();
     this._initAutoComplete();
   }
 
-  _initUser() {
-    this.loginService.currentUser()
-      .then(user => {
-        this.user = user;
-        this.isUserLoggedIn = true;
-      })
-      .catch(() => {
-        this.user = null;
-        this.isUserLoggedIn = false;
-      });
-  }
+  // _initUser() {
+  //   this.loginService.currentUser()
+  //     .then(user => {
+  //       this.user = user;
+  //       this.isUserLoggedIn = true;
+  //     })
+  //     .catch(() => {
+  //       this.user = null;
+  //       this.isUserLoggedIn = false;
+  //     });
+  // }
 
   _initAutoComplete() {
     $('#packageSearch').autocomplete({
