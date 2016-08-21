@@ -1,6 +1,6 @@
 System.config({
   defaultJSExtensions: true,
-  transpiler: "traceur",
+  transpiler: "babel",
   paths: {
     "*": "dist/*",
     "github:*": "jspm_packages/github/*",
