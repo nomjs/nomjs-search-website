@@ -43,25 +43,17 @@ To run the app, follow these steps.
 1. Browse to [http://localhost:9081](http://localhost:9081) to see the app.
 
 ## Bundling
-Bundling is performed by [Aurelia Bundler](http://github.com/aurelia/bundler). A gulp task is already configured for that. Use the following command to bundle the app:
-
-  ```shell
-    gulp bundle
-  ```
-
-You can also unbundle using the command bellow:
-
-  ```shell
-    gulp unbundle
-  ```
-
-To start the bundled app, execute the following command:
+Bundling is performed by [Aurelia Bundler](http://github.com/aurelia/bundler). A gulp task is already configured for that. Use the following command to bundle and export the app:
 
   ```shell
     gulp export
   ```
 
-Then copy the contents of the `export` directory to `server/public`. TODO This step should be automated.
+To run the bundled version of the app, copy the contents of the `export` directory to `../server/public`, first deleting any content that was already there (TODO this step should be automated). Then start the server, following [these](../server/README.md) instructions.
+
+Also, temporarily required, while static sample data is being used for search results, copy `sample-data` folder to `../server/public`.
+
+Remember to run `gulp unbundle` before committing any code changes.
 
 #### Configuration
 The configuration is done by ```bundles.js``` file.
